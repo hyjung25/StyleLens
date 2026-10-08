@@ -245,28 +245,6 @@ Screenshot message: `We couldn't reach the analysis server. Please try again sho
 데스크톱 470
 ```
 
-### 17. Request documentation drafts
-
-```text
-너가 일단 다 적어봐. 내가 그걸 보고 수정할게 있으면 수정할게
-```
-
-### 18. Request public GitHub publication and README cleanup
-
-```text
-그 requirement에 맞게 github에 올려줘. 그리고 readme에 직접 입력들 다 바꿔줘
-```
-
-Codex prepared a standalone repository with README and prompt log at the root, removed README placeholders, corrected the documented Node.js requirement, and checked that secrets and local dependencies were excluded. The app uses `gpt-4.1-mini` for runtime clothing analysis. Documentation and implementation were assisted by Codex; an exact underlying model version was not independently recorded for each development session.
-
-### 19. Switch frontend hosting to GitHub Pages
-
-```text
-그럼 readme도 바꾸고 github pages로 해
-```
-
-Codex added a GitHub Actions Pages workflow, configured Vite's repository base path and home link, and updated the README from Vercel to GitHub Pages. The public backend URL is a repository Actions variable; the OpenAI key stays on Render. A missing production API URL now produces a friendly message instead of requesting localhost. The original specification above is preserved verbatim, including the earlier Vercel plan.
-
 ## One place AI got it wrong
 
 Deployment follow-up: the student supplied `https://stylelens-ssqa.onrender.com`. Codex configured the GitHub repository variable `VITE_API_URL` to that address. A real preflight request revealed `Disallowed CORS origin`; the backend was updated to explicitly allow `https://hyjung25.github.io` in addition to environment-configured origins.
