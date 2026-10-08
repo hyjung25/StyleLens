@@ -269,6 +269,8 @@ Codex added a GitHub Actions Pages workflow, configured Vite's repository base p
 
 ## One place AI got it wrong
 
+Deployment follow-up: the student supplied `https://stylelens-ssqa.onrender.com`. Codex configured the GitHub repository variable `VITE_API_URL` to that address. A real preflight request revealed `Disallowed CORS origin`; the backend was updated to explicitly allow `https://hyjung25.github.io` in addition to environment-configured origins.
+
 The clearest failure was the portrait preview. Codex first said that replacing `object-fit: cover` with `object-fit: contain` had solved the crop, but the live interface still hid the person's legs. It then tried an auto-height preview, which showed the photo but made the layout much too tall. I had to clarify three independent requirements—fixed box, preserved source ratio, and acceptable empty space—and continue testing the actual UI. The final solution used a background image with `background-size: contain`. This taught me not to accept a plausible CSS explanation without verifying the rendered result.
 
 A second mistake involved CORS. A direct API call worked, so the app was initially reported as working, but the browser still failed because `localhost` and `127.0.0.1` were treated as different origins. Inspecting the exact environment values and testing a real preflight request exposed the mismatch.

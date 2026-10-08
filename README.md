@@ -2,7 +2,7 @@
 
 Author: Michael Jung. Built with AI assistance; see [prompt_log.md](./prompt_log.md) for the development record.
 
-This documentation is an AI-assisted draft awaiting the author's final rewrite. The frontend uses GitHub Pages; the Render backend connection, demo video, and phone testing are pending.
+This documentation is an AI-assisted draft awaiting the author's final rewrite. The frontend uses GitHub Pages and the backend uses Render. The demo video and phone testing are pending.
 
 StyleLens is a full-stack web application that analyzes a clothing photo and returns structured information about the main garment: category, primary color, pattern, style, recommended seasons, and a short description.
 
@@ -11,7 +11,7 @@ I kept the project deliberately focused so I could understand its complete flow.
 ## Links
 
 - Frontend: [StyleLens on GitHub Pages](https://hyjung25.github.io/StyleLens/)
-- Analysis service: Render backend connection pending; the public frontend cannot analyze images until connected.
+- Backend API: [StyleLens on Render](https://stylelens-ssqa.onrender.com/docs)
 - GitHub: [hyjung25/StyleLens](https://github.com/hyjung25/StyleLens)
 - Demo video: Not published yet.
 
@@ -164,6 +164,8 @@ Open `http://127.0.0.1:5173`.
 3. Build command: `pip install -r requirements.txt`
 4. Start command: `uvicorn main:app --host 0.0.0.0 --port $PORT`
 5. Add `OPENAI_API_KEY`, `OPENAI_MODEL`, and `ALLOWED_ORIGINS` in Render.
+
+The published frontend origin `https://hyjung25.github.io` is explicitly allowed by the backend. `ALLOWED_ORIGINS` adds other origins for local development or alternate frontends.
 
 ### GitHub Pages frontend
 
