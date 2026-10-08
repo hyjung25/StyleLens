@@ -1,11 +1,13 @@
 const LABELS = {
   category: "Category",
-  primary_color: "Primary color",
+  primary_colors: "Primary colors",
   pattern: "Pattern",
   style: "Style",
 };
 
 function ResultCard({ result, onReset }) {
+  const colors = result.primary_colors || (result.primary_color ? [result.primary_color] : []);
+
   return (
     <div className="result-content">
       <div className="result-header">
@@ -22,7 +24,7 @@ function ResultCard({ result, onReset }) {
         {Object.entries(LABELS).map(([key, label]) => (
           <div className="detail-item" key={key}>
             <span>{label}</span>
-            <strong>{result[key]}</strong>
+            <strong>{key === "primary_colors" ? colors.join(", ") : result[key]}</strong>
           </div>
         ))}
       </div>
@@ -42,4 +44,3 @@ function ResultCard({ result, onReset }) {
 }
 
 export default ResultCard;
-

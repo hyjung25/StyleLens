@@ -4,7 +4,7 @@ Author: Michael Jung. Built with AI assistance; see [prompt_log.md](./prompt_log
 
 This documentation is an AI-assisted draft awaiting the author's final rewrite. The frontend uses GitHub Pages and the backend uses Render. The demo video and phone testing are pending.
 
-StyleLens is a full-stack web application that analyzes a clothing photo and returns structured information about the main garment: category, primary color, pattern, style, recommended seasons, and a short description.
+StyleLens is a full-stack web application that analyzes a clothing photo and returns structured information about the main garment: category, dominant colors, pattern, style, recommended seasons, and a short description.
 
 I kept the project deliberately focused so I could understand its complete flow. It does not include accounts, a database, saved closets, or recommendations. The main experience is uploading one image, analyzing it securely, and presenting a useful result clearly.
 

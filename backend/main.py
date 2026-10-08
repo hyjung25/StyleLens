@@ -32,7 +32,7 @@ class ClothingAnalysis(BaseModel):
     model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
 
     category: str = Field(min_length=1, max_length=50)
-    primary_color: str = Field(min_length=1, max_length=50)
+    primary_colors: list[str] = Field(min_length=1, max_length=3)
     pattern: str = Field(min_length=1, max_length=50)
     style: str = Field(min_length=1, max_length=50)
     season: list[str] = Field(min_length=1, max_length=4)
@@ -98,6 +98,9 @@ async def analyze_clothing(
                         "Identify and describe the main, clearly visible clothing item. "
                         "You may use the surrounding outfit only to judge its styling context. "
                         "Use short, lowercase labels for category, color, and pattern. "
+                        "Return the dominant visible colors in order as primary_colors: one to three colors. "
+                        "For a monochrome item such as all black, return one color. For a clear combination "
+                        "such as black and white, return both colors (and add a third only when visibly important). "
                         "For style, choose the most specific common label: casual, smart casual, "
                         "business casual, semi-formal, formal, streetwear, athletic, or another "
                         "clearly better label. A collared shirt is not automatically semi-formal. "
