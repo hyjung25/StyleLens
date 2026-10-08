@@ -245,6 +245,12 @@ Screenshot message: `We couldn't reach the analysis server. Please try again sho
 데스크톱 470
 ```
 
+### 17. Request multiple dominant colors
+
+```text
+옷이 무슨색인지 알려줄때 한 색만 알려주지 말고 그냥 top 3 색들 말하자. 만약 올블랙이런거면그냥 색 하나만 말하면 되는데 흰검조합이면 흰색, 검은색, 둘 다 말해야지
+```
+
 ## One place AI got it wrong
 
 Deployment follow-up: the student supplied `https://stylelens-ssqa.onrender.com`. Codex configured the GitHub repository variable `VITE_API_URL` to that address. A real preflight request revealed `Disallowed CORS origin`; the backend was updated to explicitly allow `https://hyjung25.github.io` in addition to environment-configured origins.
