@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import ImageUploader from "./components/ImageUploader.jsx";
 import ResultCard from "./components/ResultCard.jsx";
 
-const API_URL = (import.meta.env.VITE_API_URL ||
-  (import.meta.env.DEV ? "http://127.0.0.1:8000" : "")).replace(/\/$/, "");
+const API_URL = (
+  import.meta.env.VITE_API_URL ||
+  (import.meta.env.DEV ? "http://127.0.0.1:8000" : "https://stylelens-ssqa.onrender.com")
+).replace(/\/$/, "");
 
 function App() {
   const [file, setFile] = useState(null);
