@@ -259,6 +259,14 @@ Screenshot message: `We couldn't reach the analysis server. Please try again sho
 
 Codex prepared a standalone repository with README and prompt log at the root, removed README placeholders, corrected the documented Node.js requirement, and checked that secrets and local dependencies were excluded. The app uses `gpt-4.1-mini` for runtime clothing analysis. Documentation and implementation were assisted by Codex; an exact underlying model version was not independently recorded for each development session.
 
+### 19. Switch frontend hosting to GitHub Pages
+
+```text
+그럼 readme도 바꾸고 github pages로 해
+```
+
+Codex added a GitHub Actions Pages workflow, configured Vite's repository base path and home link, and updated the README from Vercel to GitHub Pages. The public backend URL is a repository Actions variable; the OpenAI key stays on Render. A missing production API URL now produces a friendly message instead of requesting localhost. The original specification above is preserved verbatim, including the earlier Vercel plan.
+
 ## One place AI got it wrong
 
 The clearest failure was the portrait preview. Codex first said that replacing `object-fit: cover` with `object-fit: contain` had solved the crop, but the live interface still hid the person's legs. It then tried an auto-height preview, which showed the photo but made the layout much too tall. I had to clarify three independent requirements—fixed box, preserved source ratio, and acceptable empty space—and continue testing the actual UI. The final solution used a background image with `background-size: contain`. This taught me not to accept a plausible CSS explanation without verifying the rendered result.

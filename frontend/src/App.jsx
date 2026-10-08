@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import ImageUploader from "./components/ImageUploader.jsx";
 import ResultCard from "./components/ResultCard.jsx";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+const API_URL = (import.meta.env.VITE_API_URL ||
+  (import.meta.env.DEV ? "http://127.0.0.1:8000" : "")).replace(/\/$/, "");
 
 function App() {
   const [file, setFile] = useState(null);
@@ -30,6 +31,10 @@ function App() {
 
   async function analyzeImage() {
     if (!file) return;
+    if (!API_URL) {
+      setError("Image analysis is not available yet. Please try again later.");
+      return;
+    }
 
     setIsLoading(true);
     setError("");
@@ -69,7 +74,7 @@ function App() {
   return (
     <div className="app-shell">
       <header className="site-header">
-        <a className="brand" href="/" aria-label="StyleLens home">
+        <a className="brand" href={import.meta.env.BASE_URL} aria-label="StyleLens home">
           <span className="brand-mark" aria-hidden="true">S</span>
           <span>StyleLens</span>
         </a>
@@ -147,4 +152,3 @@ function App() {
 }
 
 export default App;
-

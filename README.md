@@ -2,7 +2,7 @@
 
 Author: Michael Jung. Built with AI assistance; see [prompt_log.md](./prompt_log.md) for the development record.
 
-This documentation is an AI-assisted draft awaiting the author's final rewrite. Public deployment, the demo video, and phone testing are pending.
+This documentation is an AI-assisted draft awaiting the author's final rewrite. The frontend uses GitHub Pages; the Render backend connection, demo video, and phone testing are pending.
 
 StyleLens is a full-stack web application that analyzes a clothing photo and returns structured information about the main garment: category, primary color, pattern, style, recommended seasons, and a short description.
 
@@ -10,7 +10,8 @@ I kept the project deliberately focused so I could understand its complete flow.
 
 ## Links
 
-- Live app: Not deployed yet. Use the local setup below.
+- Frontend: [StyleLens on GitHub Pages](https://hyjung25.github.io/StyleLens/)
+- Analysis service: Render backend connection pending; the public frontend cannot analyze images until connected.
 - GitHub: [hyjung25/StyleLens](https://github.com/hyjung25/StyleLens)
 - Demo video: Not published yet.
 
@@ -74,7 +75,7 @@ The frontend has one main stateful component and two small UI components. The ba
 - FastAPI and Pydantic
 - OpenAI Responses API
 - Plain CSS
-- Vercel frontend deployment
+- GitHub Pages frontend deployment
 - Render backend deployment
 
 ## Project structure
@@ -164,15 +165,18 @@ Open `http://127.0.0.1:5173`.
 4. Start command: `uvicorn main:app --host 0.0.0.0 --port $PORT`
 5. Add `OPENAI_API_KEY`, `OPENAI_MODEL`, and `ALLOWED_ORIGINS` in Render.
 
-### Vercel frontend
+### GitHub Pages frontend
 
-1. Import the repository and choose `frontend` as the root directory.
-2. Add `VITE_API_URL` with the public Render URL.
-3. Deploy, then set Render's `ALLOWED_ORIGINS` to the exact Vercel origin without a trailing slash.
+1. In repository Settings → Pages, choose **GitHub Actions** as the source.
+2. In Settings → Secrets and variables → Actions → Variables, add `VITE_API_URL` with the HTTPS Render service URL.
+3. Set Render's `ALLOWED_ORIGINS` to `https://hyjung25.github.io` (no repository path or trailing slash).
+4. Push to `main`, or run **Deploy StyleLens to GitHub Pages** from the Actions tab. Changing a variable requires a new build.
+
+The workflow builds `frontend/dist` using Node.js 24 and publishes it to `https://hyjung25.github.io/StyleLens/`. Vite uses `/StyleLens/` as its base path in GitHub Actions and `/` locally. GitHub Pages serves only the frontend; FastAPI still runs on Render. If the backend URL is missing, analysis displays an availability message rather than contacting the visitor's localhost.
 
 ## Security and privacy
 
-The OpenAI key exists only in the FastAPI environment. It is never included in React or returned to the browser. `.env`, virtual-environment, build, and dependency folders are ignored by Git. Render should store the key as a secret environment variable; Vercel receives only the intentionally public backend URL.
+The OpenAI key exists only in the FastAPI environment. It is never included in React or returned to the browser. `.env`, virtual-environment, build, and dependency folders are ignored by Git. Render should store the key as a secret environment variable. GitHub Actions receives only the public backend URL as `VITE_API_URL`; never put the OpenAI key into a `VITE_` variable.
 
 Uploaded images are sent to OpenAI for analysis. StyleLens has no database or application feature that saves uploads; multipart parsing may temporarily spool larger uploads to disk. OpenAI's data handling is separate from local application storage. CORS controls browser access but does not authenticate callers or prevent direct requests to the public endpoint.
 
@@ -208,7 +212,8 @@ I used OpenAI Codex to scaffold the React and FastAPI code, debug CORS and previ
 - [FastAPI file uploads](https://fastapi.tiangolo.com/tutorial/request-files/)
 - [FastAPI CORS](https://fastapi.tiangolo.com/tutorial/cors/)
 - [Vite environment variables](https://vite.dev/guide/env-and-mode)
+- [Vite GitHub Pages deployment guide](https://vite.dev/guide/static-deploy.html#github-pages)
 
 ## AI-generated documentation
 
-Codex drafted this README, including the technical explanations, setup instructions, and development summary. The author has requested a draft to review and rewrite; it should not yet be treated as a student-written final submission. Deployment and video links will be added after those deliverables exist.
+Codex drafted this README, including the technical explanations, setup instructions, and development summary. The author has requested a draft to review and rewrite; it should not yet be treated as a student-written final submission. The video link will be added after publication.
